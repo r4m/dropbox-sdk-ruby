@@ -22,6 +22,15 @@ module Dropbox
       raise ApiError.new(r) if r.code != 200
     end
 
+    # Get a temporary link to stream content of a file..
+    #
+    # @param [String] path
+    # @return [Dropbox::Metadata]
+    def get_temporary_link(from_path, to_path)
+      resp = request('/files/get_temporary_link', path: from_path)
+      parse_tagged_response(resp)
+    end
+    
     # Copy a file or folder to a different location in the user's Dropbox.
     #
     # @param [String] from_path
